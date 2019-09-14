@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Linked List
-
+require 'pry'
 
 class Node
   attr_accessor :next
@@ -85,6 +85,21 @@ class LinkedList
       puts node
     end
   end
+
+  # CTCI-2.1: Write code to remove duplicates from an unsorted LinkedList
+  def remove_duplicates
+    node = @head
+    h = Hash.new(0)
+    return false unless node.next
+    h[@head.data] += 1
+    while (node = node.next)
+      h[node.data] += 1
+      if h[node.data] > 1
+        previous_node = find_previous(node.data)
+        previous_node.next = previous_node.next.next
+      end
+    end
+  end
 end
 
 # TEST 
@@ -92,15 +107,20 @@ list = LinkedList.new
 
 list.append('A')
 list.append('B')
+list.append('A')
+list.append('A')
 list.append('C')
 list.append('D')
+
 
 puts "Display the list"
 
 list.display
 
-list.delete('B')
-
-puts 'Detele B'
+list.remove_duplicates
+#list.delete('B')
+puts 'Answer should be A B C D'
+list.display
+#puts 'Detele B'
 
 

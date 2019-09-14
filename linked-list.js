@@ -49,6 +49,24 @@ class LinkedList {
       prevNode.next = prevNode.next.next;
     }
   }
+  // CTCI: 2.1 Remove duplicates from an unsorted linked list.
+  removeDuplicates() {
+    let node = this.head
+    let hash = {};
+    if(!node.next) return
+
+    while(node = node.next) {
+      if(!hash[node.element]){
+        hash[node.element] = 0;
+      }
+      hash[node.element] += 1
+      if(hash[node.element] > 1) {
+        let previousNode = this.findPrevious(node.element);
+        previousNode.next = previousNode.next.next;
+      }
+    }
+    console.dir(hash);
+  }
 }
 
 // TEST 
@@ -57,8 +75,8 @@ cities.insert('Conway', 'head');
 cities.insert('Russellville', 'Conway');
 cities.insert('Carlisle', 'Russellville');
 cities.insert('Alma', 'Russellville');
+cities.insert('Carlisle', 'Russellville');
 cities.display();
-console.log('-----------Remove Carlisle------------');
-cities.remove('Carlisle');
+console.log('------------Carlisle should only be displayed once-------------');
+cities.removeDuplicates();
 cities.display();
-
