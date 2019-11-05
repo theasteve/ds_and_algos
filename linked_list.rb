@@ -126,6 +126,23 @@ class LinkedList
       puts "Node from kth: #{n} is #{main_ptr.data}"
     end
   end
+  
+  # CTCI 2.3 remove middle node from linked list
+  def remove_middle_node
+    return if @head.nil? || @head.next.nil?
+
+    fast_ptr = @head
+    slow_ptr = @head
+    prev_node = nil
+
+    while fast_ptr.next != nil
+      fast_ptr = fast_ptr.next.next
+      prev_node = slow_ptr
+      slow_ptr = slow_ptr.next
+    end
+
+    prev_node.next = prev_node.next.next
+  end
 end
 
 # TEST
@@ -151,4 +168,7 @@ list.display
 #puts 'Delete B'
 
 
-list.last_element_of_linked_list(3)
+# list.last_element_of_linked_list(3)
+puts '------------'
+list.remove_middle_node
+list.display

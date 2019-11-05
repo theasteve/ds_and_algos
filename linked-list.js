@@ -95,8 +95,25 @@ class LinkedList {
       return mainPtr.element;
     }
   }
-}
+  // CTCI: 2.3 Delete middle node
+  deleteMiddleNode(){
+    if(this.head.element == null || this.head.next.next == null){
+      return;
+    }
 
+    let fastPtr = this.head;
+    let slowPtr = this.head;
+    let prevNode;
+
+    while(fastPtr != null){
+      fastPtr = fastPtr.next.next
+      prevNode = slowPtr
+      slowPtr = slowPtr.next
+    }
+
+    prevNode.next = prevNode.next.next
+  }
+}
 // TEST 
 var cities = new LinkedList();
 cities.insert(1, 'head');
@@ -113,4 +130,6 @@ cities.display();
 console.log('------------Carlisle should only be displayed once-------------');
 cities.removeDuplicates();
 //cities.display();
-cities.returnKthToLast(3);
+//cities.returnKthToLast(3);
+cities.deleteMiddleNode();
+cities.display();
