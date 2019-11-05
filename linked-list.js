@@ -67,16 +67,50 @@ class LinkedList {
     }
     console.dir(hash);
   }
+
+  // CTCI: 2.2 Return Kth to last element of single Link List
+  returnKthToLast(n){
+    if(!n) { return }
+    let mainPtr = this.head;
+    let refPtr = this.head;
+    let count = 0;
+
+    if(this.head != null){
+      while(count < n){
+        if(refPtr == null){
+          console.log('N is greater than the number of nodes in the list');
+          return
+        }
+        refPtr = refPtr.next;
+        count++;
+      }
+
+      while(refPtr != null){
+        debugger
+        mainPtr = mainPtr.next;
+        refPtr = refPtr.next;
+      }
+
+      console.log(`Kth to last element is ${mainPtr.element}`)
+      return mainPtr.element;
+    }
+  }
 }
 
 // TEST 
 var cities = new LinkedList();
-cities.insert('Conway', 'head');
-cities.insert('Russellville', 'Conway');
-cities.insert('Carlisle', 'Russellville');
-cities.insert('Alma', 'Russellville');
-cities.insert('Carlisle', 'Russellville');
+cities.insert(1, 'head');
+cities.insert(2, 1);
+cities.insert(8, 2);
+cities.insert(3, 8);
+cities.insert(7, 3);
+cities.insert(0, 7);
+cities.insert(4, 0);
+
+
+
 cities.display();
 console.log('------------Carlisle should only be displayed once-------------');
 cities.removeDuplicates();
-cities.display();
+//cities.display();
+cities.returnKthToLast(3);
